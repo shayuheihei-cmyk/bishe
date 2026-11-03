@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#0b0b0a" />
+    <title>华佗五禽戏 · 手势动捕</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="experience" aria-live="polite">
+      <section id="startScreen" class="screen start-screen is-active" aria-label="五禽戏开始界面">
+        <img
+          class="screen-art"
+          src="./assets/五禽戏-首页-干净底图.png"
+          alt="华佗五禽戏开始界面"
+        />
+
+        <div class="gesture-callout start-action-label"><span>握拳开始</span></div>
+
+        <div class="taiji-ink-animation" aria-hidden="true">
+          <span class="outer-qi-flow outer-qi-flow-one"></span>
+          <span class="outer-qi-flow outer-qi-flow-two"></span>
+          <span class="outer-qi-flow outer-qi-flow-three"></span>
+          <span class="ink-flow-ring ink-flow-ring-dark"></span>
+          <span class="ink-flow-ring ink-flow-ring-light"></span>
+          <span class="ink-edge-glow"></span>
+          <span class="taiji-mist taiji-mist-one"></span>
+          <span class="taiji-mist taiji-mist-two"></span>
+          <span class="taiji-mist taiji-mist-three"></span>
+          <span class="floating-ink-dot ink-dot-one"></span>
+          <span class="floating-ink-dot ink-dot-two"></span>
+          <span class="floating-ink-dot ink-dot-three"></span>
+          <span class="floating-ink-dot ink-dot-four"></span>
+          <span class="floating-ink-dot ink-dot-five"></span>
+        </div>
+
+      </section>
+
+      <section id="loadingScreen" class="screen loading-screen" aria-label="五禽戏加载界面">
+        <img
+          class="screen-art"
+          src="./assets/五禽戏-华佗墨韵加载中.png"
+          alt="华佗五禽戏加载中"
+        />
+
+        <canvas id="loadingTitleCanvas" class="loading-title-canvas" aria-hidden="true"></canvas>
+
+        <button id="backButton" class="back-button" type="button" aria-label="返回开始界面">
+          <span class="back-arrow" aria-hidden="true">←</span>
+          <span>返回</span>
+        </button>
+
+        <div id="pointerHint" class="pointer-hint">
+          <strong>手势控制</strong>
+          <span id="pointerStatus">张掌稍停 · 快速左滑返回</span>
+        </div>
+
+        <div class="loading-motion" role="status" aria-live="polite">
+          <div class="loading-track" aria-hidden="true">
+            <div id="loadingFill" class="loading-fill"></div>
+            <span class="loading-glint"></span>
+          </div>
+          <div class="loading-status">
+            <span id="loadingPhase">调息凝神</span>
+            <strong id="loadingPercent">0%</strong>
+          </div>
+        </div>
+
+        <div class="gesture-callout continue-gesture-hint" role="status" aria-live="polite">
+          <span>即将进入</span>
+        </div>
+      </section>
+
+      <section id="selectionScreen" class="screen selection-screen" aria-label="五禽戏徽章选择界面">
+        <img class="screen-art" src="./assets/五禽戏-徽章选择.png" alt="五禽戏虎、鹿、熊、猿、鸟五个徽章选择界面" />
+        <div class="selection-badge badge-tiger" data-name="虎戏" data-lesson="tiger" aria-label="虎戏徽章"></div>
+        <div class="selection-badge badge-deer" data-name="鹿戏" data-lesson="deer" aria-label="鹿戏徽章"></div>
+        <div class="selection-badge badge-bear" data-name="熊戏" aria-label="熊戏徽章"></div>
+        <div class="selection-badge badge-monkey" data-name="猿戏" aria-label="猿戏徽章"></div>
+        <div class="selection-badge badge-bird" data-name="鸟戏" data-lesson="bird" aria-label="鸟戏徽章"></div>
+        <div class="selection-darkness" aria-hidden="true"></div>
+        <div class="selection-warmth" aria-hidden="true"></div>
+        <div class="selection-hint" id="selectionHint">手掌移动探索 · 稍停后左滑返回</div>
+      </section>
+
+      <section id="tigerScreen" class="screen tiger-screen" aria-label="虎戏动作学习界面">
+        <img id="tigerArt" class="screen-art" src="./assets/虎戏-动作-1.png" alt="虎戏动作学习，第1步：起势调息" />
+        <img id="tigerArtIncoming" class="screen-art tiger-art-incoming" src="./assets/虎戏-动作-1.png" alt="" aria-hidden="true" />
+        <div class="tiger-gesture-hint">张掌左滑后退 · 握拳前进</div>
+        <button id="tigerBack" class="tiger-hit tiger-back" type="button" aria-label="返回五禽选择"></button>
+        <button class="tiger-hit tiger-step tiger-step-1" type="button" data-step="0" aria-label="查看第1步：起势调息"></button>
+        <button class="tiger-hit tiger-step tiger-step-2" type="button" data-step="1" aria-label="查看第2步：握拳上提"></button>
+        <button class="tiger-hit tiger-step tiger-step-3" type="button" data-step="2" aria-label="查看第3步：虎爪上举"></button>
+        <button class="tiger-hit tiger-step tiger-step-4" type="button" data-step="3" aria-label="查看第4步：握拳下拉"></button>
+        <button class="tiger-hit tiger-step tiger-step-5" type="button" data-step="4" aria-label="查看第5步：回正"></button>
+        <button id="tigerNext" class="tiger-hit tiger-next" type="button" aria-label="握拳前进"></button>
+      </section>
+
+      <div id="gesturePointer" class="gesture-pointer" aria-hidden="true">
+        <span class="gesture-pointer-core"></span>
+      </div>
+
+      <aside id="capturePanel" class="capture-panel" aria-label="手部动作捕捉预览">
+        <div class="capture-heading">
+          <span class="capture-dot" aria-hidden="true"></span>
+          <span>手部动捕</span>
+          <span id="fpsLabel" class="fps-label">准备中</span>
+        </div>
+
+        <div class="camera-stage">
+          <video id="cameraVideo" autoplay muted playsinline></video>
+          <canvas id="landmarkCanvas"></canvas>
+          <div class="camera-corners" aria-hidden="true"></div>
+          <div id="progressRing" class="progress-ring" aria-hidden="true">
+            <div class="progress-ring-core">
+              <span id="progressValue">0</span><small>%</small>
+            </div>
+          </div>
+        </div>
+
+        <div class="capture-copy">
+          <strong id="gestureLabel">正在初始化识别模型</strong>
+          <span id="statusLabel">首次加载需要连接网络</span>
+        </div>
+
+        <button id="retryButton" class="retry-button" type="button" hidden>重新启用摄像头</button>
+      </aside>
+    </main>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
